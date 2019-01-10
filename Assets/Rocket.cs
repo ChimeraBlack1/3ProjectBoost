@@ -25,6 +25,21 @@ public class Rocket : MonoBehaviour {
         
 	}
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch(collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("OK");
+                break;
+            default:
+                print("Dead");
+                // todo kill player
+                break;
+            
+        }
+    }
+
     private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))  // can thrust while rotating
@@ -60,6 +75,6 @@ public class Rocket : MonoBehaviour {
         rigidBody.freezeRotation = false;
     }
 
-
+    
 
 }
