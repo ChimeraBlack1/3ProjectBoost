@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
@@ -32,9 +30,13 @@ public class Rocket : MonoBehaviour {
             case "Friendly":
                 print("OK");
                 break;
+            case "Finish":
+                print("Hit Finish");
+                SceneManager.LoadScene(1);
+                break;
             default:
                 print("Dead");
-                // todo kill player
+                SceneManager.LoadScene(0);
                 break;
             
         }
@@ -55,6 +57,8 @@ public class Rocket : MonoBehaviour {
             audioSource.Stop();
         }
     }
+
+
     private void Rotate()
     {
         rigidBody.freezeRotation = true;
