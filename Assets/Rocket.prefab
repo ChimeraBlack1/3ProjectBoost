@@ -596,11 +596,13 @@ MonoBehaviour:
   rcsThrust: 250
   mainThrust: 25
   mainEngine: {fileID: 8300000, guid: 03bf5fc7028cc7a48ac169fdd673c80c, type: 3}
-  success: {fileID: 8300000, guid: c62df41e91a1c4940af390be4a6aaffd, type: 3}
+  success: {fileID: 8300000, guid: 494ddd26c9b1dba428c01eaf9d4c7623, type: 3}
   death: {fileID: 8300000, guid: 04f50d24e51237c4bb01a0fe02ac29b2, type: 3}
-  mainEngineParticles: {fileID: 0}
-  successParticles: {fileID: 0}
-  deathParticles: {fileID: 0}
+  mainEngineParticles: {fileID: 198254256688904818}
+  successParticles: {fileID: 198631066050499358, guid: 62198a3a5dbb64a4f9e1618929224faa,
+    type: 2}
+  deathParticles: {fileID: 198204746014789312, guid: ab79a37535b979f48b6de56e3a0a5cb0,
+    type: 2}
 --- !u!136 &136394868433575222
 CapsuleCollider:
   m_ObjectHideFlags: 1
