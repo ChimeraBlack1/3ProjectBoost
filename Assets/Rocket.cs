@@ -25,6 +25,8 @@ public class Rocket : MonoBehaviour {
 
     State state = State.Alive;
 
+    bool collisionsDisabled = false;
+
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
@@ -38,11 +40,30 @@ public class Rocket : MonoBehaviour {
             RespondToThrustInput();
             RespondToRotateInput();
         }
+        // todo only if debug on
+        if (Debug.isDebugBuild)
+        {
+            RespondToDebugKeys();
+        }
+         
 	}
+
+
+    private void RespondToDebugKeys ()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }else if (Input.GetKeyDown(KeyCode.C))
+        {
+            // toggle collision
+            collisionsDisabled = !collisionsDisabled;
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(state != State.Alive)
+        if(state != State.Alive || collisionsDisabled)
         {
             return;
         }
@@ -81,7 +102,13 @@ public class Rocket : MonoBehaviour {
 
     private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1); // todo allow for more than 2 levels
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex); 
     }
 
     private void LoadFirstLevel()
@@ -115,22 +142,23 @@ public class Rocket : MonoBehaviour {
 
     private void RespondToRotateInput()
     {
-        rigidBody.freezeRotation = true;
-
-        
         float rotationSpeed = rcsThrust * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.A))
         {
+            rigidBody.freezeRotation = true;
             transform.Rotate(Vector3.forward * rotationSpeed);
+            rigidBody.freezeRotation = false;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
+            rigidBody.freezeRotation = true;
             transform.Rotate(-Vector3.forward * rotationSpeed);
+            rigidBody.freezeRotation = false;
         }
 
-        rigidBody.freezeRotation = false;
+        
     }
 
     
