@@ -65,6 +65,7 @@ public class Rocket : MonoBehaviour {
     {
         state = State.Transcending;
         audioSource.Stop();
+        successParticles.Play();
         audioSource.PlayOneShot(success);
         Invoke("LoadNextLevel", 2f); // parameterize time
     }
@@ -73,6 +74,7 @@ public class Rocket : MonoBehaviour {
     {
         state = State.Dying;
         audioSource.Stop();
+        deathParticles.Play();
         audioSource.PlayOneShot(death);
         Invoke("LoadFirstLevel", 3f); // parameterize time
     }
